@@ -1,0 +1,23 @@
+name = input("Enter file:")
+if len(name) < 1 : 
+    name = "mbox-short.txt"
+handle = open(name)
+
+x = list()
+for line in handle:
+    if not line.startswith("From:"): 
+        continue
+    line = line.split()
+    x.append(line[1])
+
+emails = dict()
+for word in x:
+    emails[word] = emails.get(word,0) + 1
+        
+bigCount = 0
+bigword = 0
+for key,value in emails.items():
+    if bigCount is None or value > bigCount:
+        bigword = key
+        bigCount = value
+print (bigword, bigCount)
